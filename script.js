@@ -5,11 +5,15 @@
  **************/
 
 function updateCoffeeView(coffeeQty) {
-  // your code here
+  let coffeeCount = document.getElementById('coffee_counter');
+
+  coffeeCount.innerText= coffeeQty;
 }
 
 function clickCoffee(data) {
-  // your code here
+  data.coffee += 1;
+
+  updateCoffeeView(data.coffee);
 }
 
 /**************
@@ -17,15 +21,36 @@ function clickCoffee(data) {
  **************/
 
 function unlockProducers(producers, coffeeCount) {
-  // your code here
+  for (let i = 0; i < producers.length; i++){
+    if (coffeeCount >= producers[i].price/2){
+      producers[i].unlocked = true;
+    }
+  }
 }
 
 function getUnlockedProducers(data) {
-  // your code here
+  let unlockedProducers = [];
+  for (let i = 0; i < data.producers[i];i++){
+    if (data.producers[i].unlocked == true){
+      
+      unlockedProducers.push(data.producers[i]);
+    }
+  }
+  return unlockedProducers;
 }
 
 function makeDisplayNameFromId(id) {
-  // your code here
+  id = id.toLowerCase().split('_');
+  for (var i = 0; i < id.length; i++) {
+    if(id[i] === '_'){
+      id[i] = ' ';
+    }
+  }
+  for (var i = 0; i < id.length; i++) {
+    id[i] = id[i].charAt(0).toUpperCase() + id[i].slice(1);
+  }
+  
+  return id.join(' ');
 }
 
 // You shouldn't need to edit this function-- its tests should pass once you've written makeDisplayNameFromId
@@ -49,8 +74,15 @@ function makeProducerDiv(producer) {
   return containerDiv;
 }
 
+
+// deleteAllCHildNodes needs work 
+
 function deleteAllChildNodes(parent) {
-  // your code here
+  let child = parent.firstElementChild;
+  for (let i = 0; i < parent.length;i++){
+    parent.removeChild(child)
+    child = parent.firstElementChild;
+  }
 }
 
 function renderProducers(data) {
@@ -66,7 +98,9 @@ function getProducerById(data, producerId) {
 }
 
 function canAffordProducer(data, producerId) {
-  // your code here
+  let value = false;
+
+  return value;
 }
 
 function updateCPSView(cps) {
@@ -74,11 +108,15 @@ function updateCPSView(cps) {
 }
 
 function updatePrice(oldPrice) {
-  // your code here
+  let newPrice = Math.round(oldPrice * 1.25);
+
+  return newPrice;
 }
 
 function attemptToBuyProducer(data, producerId) {
-  // your code here
+  let value = false;
+
+  return value;
 }
 
 function buyButtonClick(event, data) {
