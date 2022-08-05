@@ -30,7 +30,8 @@ function unlockProducers(producers, coffeeCount) {
 
 function getUnlockedProducers(data) {
   let unlockedProducers = [];
-  for (let i = 0; i < data.producers[i];i++){
+  
+  for (let i = 0; i < data.producers.length;i++){
     if (data.producers[i].unlocked == true){
       
       unlockedProducers.push(data.producers[i]);
@@ -75,18 +76,31 @@ function makeProducerDiv(producer) {
 }
 
 
-// deleteAllCHildNodes needs work 
+// deleteAllChildNodes needs work. It uses removeChild(), but does not remove all of them.
 
 function deleteAllChildNodes(parent) {
-  let child = parent.firstElementChild;
-  for (let i = 0; i < parent.length;i++){
-    parent.removeChild(child)
-    child = parent.firstElementChild;
+
+  while (parent.firstChild){
+    parent.removeChild(parent.firstChild);
   }
+  
+    // parent.innerHTML = '';
 }
 
 function renderProducers(data) {
-  // your code here
+  let producerContainer = document.getElementById('producer_container');
+  let producerElement = document.createElement('div');
+  while(producerContainer.firstChild){
+    deleteAllChildNodes(producerContainer);
+  }
+  let unlockedProducers = getUnlockedProducers(data);
+
+  for (let i = 0;i < unlockProducers.length;i++){
+    producerContainer.appendChild(producerElement);
+  }
+
+
+  
 }
 
 /**************
@@ -94,7 +108,12 @@ function renderProducers(data) {
  **************/
 
 function getProducerById(data, producerId) {
-  // your code here
+  for(let i = 0; i < data.producers.length; i++){
+    if(data.producers[i].id == producerId){
+      producerId = data.producers[i];
+    }
+  }
+  return producerId;
 }
 
 function canAffordProducer(data, producerId) {
