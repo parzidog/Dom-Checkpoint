@@ -14,6 +14,7 @@ function clickCoffee(data) {
   data.coffee += 1;
 
   updateCoffeeView(data.coffee);
+  renderProducers(data);
 }
 
 /**************
@@ -83,19 +84,18 @@ function deleteAllChildNodes(parent) {
   while (parent.firstChild){
     parent.removeChild(parent.firstChild);
   }
-  
-    // parent.innerHTML = '';
 }
 
 function renderProducers(data) {
   let producerContainer = document.getElementById('producer_container');
   let producerElement = document.createElement('div');
-  while(producerContainer.firstChild){
+  if(producerContainer.firstChild){
     deleteAllChildNodes(producerContainer);
   }
+  unlockProducers(data.producers, data.coffee);
   let unlockedProducers = getUnlockedProducers(data);
 
-  for (let i = 0;i < unlockProducers.length;i++){
+  for (let i = 0;i < unlockedProducers.length;i++){
     producerContainer.appendChild(producerElement);
   }
 
@@ -119,11 +119,21 @@ function getProducerById(data, producerId) {
 function canAffordProducer(data, producerId) {
   let value = false;
 
+  
+  for(let i = 0; i < data.producers.length; i++){
+    if(data.producers[i].id == producerId && data.coffee >= data.producers[i].price){
+      value = true;
+    }
+  }
+
   return value;
 }
 
 function updateCPSView(cps) {
-  // your code here
+  let coffeeGrowth = document.getElementById('cps')
+
+  coffeeGrowth.innerHTML=cps;
+  return coffeeGrowth.innerHTML 
 }
 
 function updatePrice(oldPrice) {
@@ -134,6 +144,15 @@ function updatePrice(oldPrice) {
 
 function attemptToBuyProducer(data, producerId) {
   let value = false;
+
+  // console.log(producerId);
+
+  for(let i = 0; i < data.producers.length;i++) {
+    if(data.producer[i]==producerId && data.coffee >= data.producer[i].price){
+      console.log('producers', data.producers[i].id,'\nid',producerId);
+      value = true;
+    }
+  }
 
   return value;
 }

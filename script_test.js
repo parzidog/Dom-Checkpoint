@@ -424,7 +424,7 @@ describe('Slice 3: Buying Producers & Tick', function() {
     let data;
     beforeEach('initialize some fake data', function() {
       data = {
-        coffee: 100,
+        coffee: 101,
         producers: [
           { id: 'producer_A', price: 50 },
           { id: 'producer_B', price: 200 },
