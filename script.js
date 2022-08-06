@@ -87,16 +87,20 @@ function deleteAllChildNodes(parent) {
 }
 
 function renderProducers(data) {
-  let producerContainer = document.getElementById('producer_container');
-  let producerElement = document.createElement('div');
-  if(producerContainer.firstChild){
-    deleteAllChildNodes(producerContainer);
+  let parent = document.getElementById('producer_container');
+  while(parent.firstChild){
+    deleteAllChildNodes(parent);
   }
   unlockProducers(data.producers, data.coffee);
   let unlockedProducers = getUnlockedProducers(data);
-
-  for (let i = 0;i < unlockedProducers.length;i++){
-    producerContainer.appendChild(producerElement);
+  
+  for(let i = 0; i < unlockedProducers.length;i++){
+  }
+  
+  for (var i = 0; i < unlockedProducers.length; i++) {
+      let containerDiv = document.createElement('div');
+      containerDiv.className = 'containerTest';
+      parent.appendChild(makeProducerDiv(unlockedProducers[i]));
   }
 
 
@@ -130,14 +134,15 @@ function canAffordProducer(data, producerId) {
 }
 
 function updateCPSView(cps) {
-  let coffeeGrowth = document.getElementById('cps')
+  let coffeeGrowth = document.getElementById('cps');
 
-  coffeeGrowth.innerHTML=cps;
-  return coffeeGrowth.innerHTML 
+  coffeeGrowth.innerText = cps;
+
+  return coffeeGrowth.innerText 
 }
 
 function updatePrice(oldPrice) {
-  let newPrice = Math.round(oldPrice * 1.25);
+  let newPrice = Math.floor(oldPrice * 1.25);
 
   return newPrice;
 }
@@ -148,9 +153,14 @@ function attemptToBuyProducer(data, producerId) {
   // console.log(producerId);
 
   for(let i = 0; i < data.producers.length;i++) {
-    if(data.producer[i]==producerId && data.coffee >= data.producer[i].price){
-      console.log('producers', data.producers[i].id,'\nid',producerId);
+    if(data.producers[i].id==producerId && data.coffee >= data.producers[i].price){
+    // if(canAffordProducer(data, data.producers[i].id)){
       value = true;
+      data.producers[i].qty +=1;
+      data.coffee -= data.producers[i].price;
+      data.producers[i].price = updatePrice(data.producers[i].price);
+      data.totalCPS += data.producers[i].cps;
+      updateCPSView(data.totalCPS);
     }
   }
 
@@ -159,10 +169,21 @@ function attemptToBuyProducer(data, producerId) {
 
 function buyButtonClick(event, data) {
   // your code here
+  // let id = event.addEventListener('click', )
+
+  // if(attemptToBuyProducer(data, id))
+
+  updateCoffeeView(data.coffee);
+
+  updateCPSView(data.totalCPS);
 }
 
 function tick(data) {
-  // your code here
+data.coffee += data.totalCPS;
+
+updateCoffeeView(data.coffee);
+
+renderProducers(data);
 }
 
 /*************************

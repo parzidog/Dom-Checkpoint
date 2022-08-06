@@ -3,6 +3,8 @@
 }
 body {
   margin: 0px;
+  background-color: #202020;
+  color: lightgray;
 }
 .column-container {
   display: flex;
@@ -35,7 +37,7 @@ body {
 .column-header {
   font-size: 25px;
   position: relative;
-  background-color: white;
+  background-color: blueviolet;
   top: 8px;
 }
 #big_coffee {
