@@ -154,24 +154,29 @@ function attemptToBuyProducer(data, producerId) {
 
   for(let i = 0; i < data.producers.length;i++) {
     if(data.producers[i].id==producerId && data.coffee >= data.producers[i].price){
-    // if(canAffordProducer(data, data.producers[i].id)){
       value = true;
       data.producers[i].qty +=1;
       data.coffee -= data.producers[i].price;
       data.producers[i].price = updatePrice(data.producers[i].price);
       data.totalCPS += data.producers[i].cps;
       updateCPSView(data.totalCPS);
+      renderProducers(data);
     }
+  }
+  if(value == false){
+    window.alert('Not enough coffee!');
   }
 
   return value;
 }
 
 function buyButtonClick(event, data) {
-  // your code here
-  // let id = event.addEventListener('click', )
 
-  // if(attemptToBuyProducer(data, id))
+  for(let i = 0; i < data.producers.length;i++){
+    if (event.target.id == 'buy_'+data.producers[i].id){
+      attemptToBuyProducer(data,data.producers[i].id)      
+    }
+  }
 
   updateCoffeeView(data.coffee);
 
