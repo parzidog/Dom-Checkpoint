@@ -3,8 +3,8 @@
 }
 body {
   margin: 0px;
-  background-color: #202020;
-  color: lightgray;
+  background-color: #004000;
+  color: white;
 }
 .column-container {
   display: flex;
@@ -37,8 +37,11 @@ body {
 .column-header {
   font-size: 25px;
   position: relative;
-  background-color: blueviolet;
+  background-color: #3e2a00;
   top: 8px;
+  border: 2px white solid;
+  border-radius: 5px;
+  padding: 2px;
 }
 #big_coffee {
   user-select: none;
@@ -58,17 +61,18 @@ body {
 #producer_container {
   padding: 10px;
   overflow: auto;
-  border: 2px black solid;
-  border-radius: 5px;
+  border: 2px white solid;
+  border-radius: 10px;
 }
 
 .producer {
   margin-bottom: 5px;
   padding: 10px;
-  border: 2px solid grey;
+  border: 2px solid white;
   border-radius: 4px;
   display: flex;
   justify-content: space-between;
+  background-color: #3e2a00;
 }
 .producer-column {
   display: flex;
@@ -83,4 +87,7 @@ body {
 .producer button {
   font-size: 15px;
   width: 50px;
+}
+a{
+  color: lightsalmon;
 }
